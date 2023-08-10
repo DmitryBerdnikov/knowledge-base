@@ -1,4 +1,5 @@
 # Typescript
+[typescript playground](https://www.typescriptlang.org/play) with support for different typescript versions
 
 ## Examples of non-obvious typescript behavior
 
