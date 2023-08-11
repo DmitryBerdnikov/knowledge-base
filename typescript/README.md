@@ -1,5 +1,5 @@
 # Typescript
-[typescript playground](https://www.typescriptlang.org/play) with support for different typescript versions
+[typescript playground](https://www.typescriptlang.org/play) with support different typescript versions
 
 ## Examples of non-obvious typescript behavior
 
@@ -95,5 +95,29 @@ const formatAmountParams = {
 
 // 4. There is no error after refactor, we expect 'USD 10', but got '$ 10'
 formatAmount(formatAmountParams);
+```
+</details>
+
+<details>
+<summary>
+  Typescript might not recognize when change data type 
+</summary>
+
+```typescript
+type Metadata = {};
+
+// 1. We create Map type
+type UserMetadata = Map<string, Metadata>;
+
+const cache: UserMetadata = new Map();
+
+// 2. It works because cache is Map
+console.log(cache.get('foo'));
+
+// 3. We create cacheCopy as object
+const cacheCopy: UserMetadata = { ...cache };
+
+// 4. We get error because it's not a Map
+console.log(cacheCopy.get('foo'));
 ```
 </details>
