@@ -114,7 +114,7 @@ const cache: UserMetadata = new Map();
 // 2. It works because cache is Map
 console.log(cache.get('foo'));
 
-// 3. We create cacheCopy as object
+// 3. We create cacheCopy as an object, but spread doesn't copy prototypes, so we won't have methods like Map does
 const cacheCopy: UserMetadata = { ...cache };
 
 // 4. We get error because it's not a Map
