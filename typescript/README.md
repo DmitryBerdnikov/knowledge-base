@@ -1,13 +1,88 @@
 # Typescript
-[typescript playground](https://www.typescriptlang.org/play) with support different typescript versions
+* [typescript playground](https://www.typescriptlang.org/play) with support different typescript versions
+* [ts-reset](https://github.com/total-typescript/ts-reset) makes built-in typings better
 
 ## Examples of non-obvious typescript behavior
+
+<details>
+<summary>
+  Any
+</summary>
+
+ts-reset can fix it
+
+```typescript
+// JSON.parse
+const a = JSON.parse('{ a: 1 }'); // any
+```
+
+```typescript
+// Array.isArray
+function parse(a: unknown) {
+  if (Array.isArray(a)) {
+    console.log(a); // a[any]
+  }
+}
+```
+
+```typescript
+// fetch
+fetch("/")
+  .then((res) => res.json())
+  .then((json) => {
+    console.log(json); // any
+  });
+```
+
+```typescript
+// localStorage, sessionStorage
+const a = localStorage.a; // any
+const b = sessionStorage.b // any
+```
+</details>
+
+<details>
+<summary>
+  Array includes method too strict on as const arrays
+</summary>
+
+ts-reset can fix it
+
+it's the same as indexOf, Set.has(), Map.has()
+
+```typescript
+// 1. set users array as const
+const userIds = [1, 2, 3] as const;
+
+// 2. Error: Argument of type '4' is not assignable to parameter of type '1 | 2 | 3'.
+userIds.includes(4);
+```
+</details>
+
+<details>
+<summary>
+  Filter array from undefined
+</summary>
+  
+ts-reset can fix it
+
+```typescript
+const arr = [1, 2, undefined];
+
+// 1. newArr type is (number | undefined)[]
+const newArr = arr.filter((item) => item !== undefined);
+
+// 2. newArr2 type is number[]
+const newArr2 = arr.filter((item): item is number => item !== undefined);
+```
+</details>
 
 <details>
 <summary>
   Control-Flow Analysis for Bracketed Element Access
 </summary>
 
+Fixed in 4.7
 [https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html#control-flow-analysis-for-bracketed-element-access](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html#control-flow-analysis-for-bracketed-element-access)
 
 ```typescript
@@ -95,6 +170,23 @@ const formatAmountParams = {
 
 // 4. There is no error after refactor, we expect 'USD 10', but got '$ 10'
 formatAmount(formatAmountParams);
+```
+
+Possible it's because:
+> TypeScript is a structural typing system. One of the effects of this is that TypeScript can't always guarantee that your object types don't contain excess properties [reset-ts description](https://github.com/total-typescript/ts-reset/tree/65fc5500ed4f383400d1bb73f95e1263a2860c49#objectkeysobjectentries)
+
+```typescript
+type Func = () => {
+  id: string;
+};
+
+const func: Func = () => {
+  return {
+    id: "123",
+    // No error on an excess property!
+    name: "Hello!",
+  };
+};
 ```
 </details>
 
