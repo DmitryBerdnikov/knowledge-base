@@ -84,7 +84,7 @@ const query: Record<string, string | string[]> = {};
 const COUNTRY_KEY = 'country';
 
 if (typeof query[COUNTRY_KEY] === 'string') {
-    // There is an error in 4.6 and below, because it's still a string, or a string[]
+    // There is an error below 4.7, because it's still a string, or a string[]
     const queryCountry: string = query[COUNTRY_KEY];
 }
 ```
@@ -92,7 +92,7 @@ if (typeof query[COUNTRY_KEY] === 'string') {
 
 <details>
 <summary>
-  Assigning an literal to an enum type won't error (fixed in 5.0)
+  Enum issues (fixed in 5.0)
 </summary>
 
 ```typescript
@@ -102,8 +102,36 @@ enum SomeEvenDigit {
     Four = 4
 }
 
-// In 4.9 and below there is no error
+// Below 5 there is no error
 const a: SomeEvenDigit = 1;
+```
+
+```typescript
+enum LogLevel {
+    Debug, // 0
+    Log, // 1
+    Warning, // 2
+    Error // 3
+}
+
+const showMessage = (logLevel: LogLevel, message: string) => {
+    // code...
+}
+
+// 1. It's expected
+showMessage(0, 'debug message');
+showMessage(2, 'warning message');
+
+// 2. Below 5 there is no error
+showMessage(-100, 'any message')
+```
+
+```typescript
+enum User {
+  name = 'name',
+  // Below 5 there is error: Computed values are not permitted in an enum with string valued members.
+  userName = `user${User.name}`
+}
 ```
 </details>
 
@@ -265,5 +293,42 @@ const cacheCopy: UserMetadata = { ...cache };
 
 // 4. We get error because it's not a Map
 console.log(cacheCopy.get('foo'));
+```
+</details>
+
+<details>
+<summary>
+  Declaration merging
+</summary>
+
+[https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces)
+
+```typescript
+interface User {
+    id: number;
+}
+
+interface User {
+    name: string;
+}
+
+// Error: Property 'id' is missing in type '{ name: string; }' but required in type 'User', because User interfaces merged
+const user: User = {
+    name: 'bar',
+}
+```
+
+```typescript
+interface Comment {
+  id: number;
+  text: string;
+}
+
+// Error: Type '{ id: number; text: string; }' is missing the following properties from type 'Comment': data, length, ownerDocument, appendData, and 59 more.
+// Comment already exists in lib.dom.d.ts
+const comment: Comment = {
+  id: 5,
+  text: "good video!",
+};
 ```
 </details>
