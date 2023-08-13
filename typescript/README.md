@@ -6,10 +6,8 @@
 
 <details>
 <summary>
-  Any
+  Any (ts-reset can fix it)
 </summary>
-
-ts-reset can fix it
 
 ```typescript
 // JSON.parse
@@ -43,10 +41,8 @@ const b = sessionStorage.b // any
 
 <details>
 <summary>
-  Array includes method too strict on as const arrays
+  Array includes method too strict on as const arrays (ts-reset can fix it)
 </summary>
-
-ts-reset can fix it
 
 it's the same as indexOf, Set.has(), Map.has()
 
@@ -61,10 +57,8 @@ userIds.includes(4);
 
 <details>
 <summary>
-  Filter array from undefined
+  Filter array from undefined (ts-reset can fix it)
 </summary>
-  
-ts-reset can fix it
 
 ```typescript
 const arr = [1, 2, undefined];
@@ -79,10 +73,9 @@ const newArr2 = arr.filter((item): item is number => item !== undefined);
 
 <details>
 <summary>
-  Control-Flow Analysis for Bracketed Element Access
+  Control-Flow Analysis for Bracketed Element Access (fixed in 4.7)
 </summary>
 
-Fixed in 4.7
 [https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html#control-flow-analysis-for-bracketed-element-access](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html#control-flow-analysis-for-bracketed-element-access)
 
 ```typescript
@@ -94,6 +87,23 @@ if (typeof query[COUNTRY_KEY] === 'string') {
     // There is an error in 4.6 and below, because it's still a string, or a string[]
     const queryCountry: string = query[COUNTRY_KEY];
 }
+```
+</details>
+
+<details>
+<summary>
+  Assigning an literal to an enum type won't error (fixed in 5.0)
+</summary>
+
+```typescript
+enum SomeEvenDigit {
+    Zero = 0,
+    Two = 2,
+    Four = 4
+}
+
+// In 4.9 and below there is no error
+const a: SomeEvenDigit = 1;
 ```
 </details>
 
@@ -125,7 +135,7 @@ const num = add(10, 20);
 </details>
 
 <details>
-<summary>Passing arguments to a function with an unsupported value</summary>
+<summary>Passing an object as a function argument with a excess property</summary>
 
 ```typescript
 type FormatAmount = {
@@ -187,6 +197,50 @@ const func: Func = () => {
     name: "Hello!",
   };
 };
+```
+</details>
+
+<details>
+<summary>Loss of key typing when Object.keys</summary>
+
+```typescript
+const obj = {a: 1, b: 2}
+
+Object.keys(obj).forEach((key) => {
+  // 1. Error because key is of string type
+  console.log(obj[key])
+
+  // 2. Possible solution is typecasting with as, but this may not be safe
+  console.log(key as keyof typeof obj)
+});
+```
+
+> TypeScript is a structural typing system. One of the effects of this is that TypeScript can't always guarantee that your object types don't contain excess properties [reset-ts description](https://github.com/total-typescript/ts-reset/tree/65fc5500ed4f383400d1bb73f95e1263a2860c49#objectkeysobjectentries)
+
+```typescript
+type Func = () => {
+  id: string;
+  userName: string;
+};
+
+const func: Func = () => {
+  return {
+    id: '123',
+    userName: 'Peter',
+    // 1. No error on an excess property
+    name: 'Excess property',
+  };
+};
+
+const result = func();
+
+Object.keys(result).forEach((key) => {
+     // 2. We get type "id" | "userName"
+    const typedKey = key as keyof typeof result;
+
+    // 3. And we expect '123' and 'Peter', but we also get 'Excess property'
+    console.log(result[typedKey]) 
+});
 ```
 </details>
 
