@@ -1,6 +1,8 @@
 # Typescript
-* [typescript playground](https://www.typescriptlang.org/play) with support different typescript versions
-* [ts-reset](https://github.com/total-typescript/ts-reset) makes built-in typings better
+
+* [typescript playground](https://www.typescriptlang.org/play): with support different typescript versions
+* [ts-reset](https://github.com/total-typescript/ts-reset): a 'CSS reset' for TypeScript, improving types for common JavaScript API's
+* [TypeScript is a Structural Type System](https://www.typescriptlang.org/play/typescript/language/structural-typing.ts.html): typescript playground example
 
 ## Examples of non-obvious typescript behavior
 
@@ -210,7 +212,6 @@ const formatAmountParams = {
 formatAmount(formatAmountParams);
 ```
 
-Possible it's because:
 > TypeScript is a structural typing system. One of the effects of this is that TypeScript can't always guarantee that your object types don't contain excess properties [reset-ts description](https://github.com/total-typescript/ts-reset/tree/65fc5500ed4f383400d1bb73f95e1263a2860c49#objectkeysobjectentries)
 
 ```typescript
@@ -332,3 +333,7 @@ const comment: Comment = {
 };
 ```
 </details>
+
+**Related links**
+* [Be Careful With Return Types In TypeScript](https://www.youtube.com/watch?v=I6V2FkW1ozQ): youtube video by Theo - t3.gg
+* [ТОП 8 вещей которые я не люблю в TypeScript](https://www.youtube.com/watch?v=jEWLhZ3ZJzQ): youtube video by Ayub Begimkulov
