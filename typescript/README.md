@@ -94,7 +94,7 @@ if (typeof query[COUNTRY_KEY] === 'string') {
 
 <details>
 <summary>
-  Enum issues (fixed in 5.0)
+  Enums issues (fixed in 5.0)
 </summary>
 
 ```typescript
@@ -106,6 +106,62 @@ enum SomeEvenDigit {
 
 // Below 5 there is no error
 const a: SomeEvenDigit = 1;
+```
+
+```typescript
+enum LogLevel {
+    Debug, // 0
+    Log, // 1
+    Warning, // 2
+    Error // 3
+}
+
+const showMessage = (logLevel: LogLevel, message: string) => {
+    // code...
+}
+
+// 1. It's expected
+showMessage(0, 'debug message');
+showMessage(2, 'warning message');
+
+// 2. Below 5 there is no error
+showMessage(-100, 'any message')
+```
+
+```typescript
+enum User {
+  name = 'name',
+  // Below 5 there is error: Computed values are not permitted in an enum with string valued members.
+  userName = `user${User.name}`
+}
+```
+</details>
+
+<details>
+<summary>
+  Enums act as nominal typing, not structural typing
+</summary>
+
+```typescript
+enum LogLevel {
+    Debug = 'Debug',
+    Error = 'Error'
+}
+
+const showMessage = (logLevel: LogLevel, message: string) => {
+    // code...
+}
+
+// 1. Error argument of type '"Debug"' is not assignable to parameter of type 'LogLevel'
+// but this is nominal typing behavior, ts expects exact value from enum LogLevel
+showMessage('Debug', 'some text')
+
+// 2. Even if we create a new enam with the same values it won't work
+enum LogLevel2 {
+    Debug = 'Debug',
+    Error = 'Error'
+}
+showMessage(LogLevel2.Debug, 'some text')
 ```
 
 ```typescript
@@ -337,3 +393,5 @@ const comment: Comment = {
 **Related links**
 * [Be Careful With Return Types In TypeScript](https://www.youtube.com/watch?v=I6V2FkW1ozQ): youtube video by Theo - t3.gg
 * [ТОП 8 вещей которые я не люблю в TypeScript](https://www.youtube.com/watch?v=jEWLhZ3ZJzQ): youtube video by Ayub Begimkulov
+* [Enums considered harmful](https://www.youtube.com/watch?v=jjMbPt_H3RQ): youtube video by 
+Matt Pocock
