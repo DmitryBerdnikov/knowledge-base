@@ -162,34 +162,25 @@ enum LogLevel2 {
     Error = 'Error'
 }
 showMessage(LogLevel2.Debug, 'some text')
-```
 
-```typescript
-enum LogLevel {
-    Debug, // 0
-    Log, // 1
-    Warning, // 2
-    Error // 3
-}
+// 3. A more obvious way to use objects with as const
+const LOG_LEVEL = {
+    DEBUG: 'debug',
+    ERROR: 'error'
+} as const
 
-const showMessage = (logLevel: LogLevel, message: string) => {
+type ObjectValues<T> = T[keyof T]
+
+type LogLevel = ObjectValues<typeof LOG_LEVEL>;
+
+const logMessage = (logLevel: LogLevel, message: string) => {
     // code...
 }
 
-// 1. It's expected
-showMessage(0, 'debug message');
-showMessage(2, 'warning message');
+// 4. There is no error because it works with a simple value, no matter where the value is passed from
+logMessage('debug', 'some text')
+logMessage(LOG_LEVEL.DEBUG, 'some text')
 
-// 2. Below 5 there is no error
-showMessage(-100, 'any message')
-```
-
-```typescript
-enum User {
-  name = 'name',
-  // Below 5 there is error: Computed values are not permitted in an enum with string valued members.
-  userName = `user${User.name}`
-}
 ```
 </details>
 
