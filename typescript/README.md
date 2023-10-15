@@ -139,6 +139,37 @@ enum User {
 
 <details>
 <summary>
+  Undefined-Returning Functions must have an explicit return (fixed in 5.1)
+</summary>
+
+[https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html#control-flow-analysis-for-bracketed-element-access](https://devblogs.microsoft.com/typescript/announcing-typescript-5-1-rc/#easier-implicit-returns-for-undefined-returning-functions)
+
+```typescript
+// no error - we inferred that 'f1' returns 'void'
+function f1() {
+    // no returns
+}
+
+// no error - 'void' doesn't need a return statement
+function f2(): void {
+    // no returns
+}
+
+// no error - 'any' doesn't need a return statement
+function f3(): any {
+    // no returns
+}
+
+//  Below 5.1 there is an error
+// A function whose declared type is neither 'void' nor 'any' must return a value.
+function f4(): undefined {
+    // no returns
+}
+```
+</details>
+
+<details>
+<summary>
   Enums act as nominal typing, not structural typing
 </summary>
 
