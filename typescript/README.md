@@ -97,6 +97,8 @@ if (typeof query[COUNTRY_KEY] === 'string') {
   Enums issues (fixed in 5.0)
 </summary>
 
+[https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#enum-overhaul](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#enum-overhaul)
+
 ```typescript
 enum SomeEvenDigit {
     Zero = 0,
