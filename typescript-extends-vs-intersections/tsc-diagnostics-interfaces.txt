@@ -1,0 +1,164 @@
+Run 1:
+  Total Time: 3.02 ms
+  Memory Used: 365429 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.82
+  Bind Time: 0.53
+  Check Time: 1.67
+  Emit Time: 0
+
+Run 2:
+  Total Time: 3.04 ms
+  Memory Used: 368468 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.01
+  Identifiers: 249091
+  Parse Time: 0.78
+  Bind Time: 0.45
+  Check Time: 1.81
+  Emit Time: 0
+
+Run 3:
+  Total Time: 3.06 ms
+  Memory Used: 363085 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.82
+  Bind Time: 0.46
+  Check Time: 1.78
+  Emit Time: 0
+
+Run 4:
+  Total Time: 3.04 ms
+  Memory Used: 365643 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.8
+  Bind Time: 0.45
+  Check Time: 1.79
+  Emit Time: 0
+
+Run 5:
+  Total Time: 3.03 ms
+  Memory Used: 364625 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.76
+  Bind Time: 0.45
+  Check Time: 1.81
+  Emit Time: 0
+
+Run 6:
+  Total Time: 3.16 ms
+  Memory Used: 363671 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.01
+  Identifiers: 249091
+  Parse Time: 0.78
+  Bind Time: 0.47
+  Check Time: 1.91
+  Emit Time: 0
+
+Run 7:
+  Total Time: 2.99 ms
+  Memory Used: 365045 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.01
+  Identifiers: 249091
+  Parse Time: 0.78
+  Bind Time: 0.47
+  Check Time: 1.74
+  Emit Time: 0
+
+Run 8:
+  Total Time: 2.97 ms
+  Memory Used: 363481 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.8
+  Bind Time: 0.51
+  Check Time: 1.66
+  Emit Time: 0
+
+Run 9:
+  Total Time: 3.06 ms
+  Memory Used: 364163 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.86
+  Bind Time: 0.43
+  Check Time: 1.77
+  Emit Time: 0
+
+Run 10:
+  Total Time: 2.99 ms
+  Memory Used: 363396 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.77
+  Bind Time: 0.45
+  Check Time: 1.77
+  Emit Time: 0
+
+Average Metrics extends interfaces:
+  Total Time: 3.04 ms
+  Memory Used: 364700.60 MB
+  Files: 9
+  Lines: 314648
+  Types: 203135
+  Symbols: 289335
+  Instantiations: 2754
+  I/O Read: 0.02
+  Identifiers: 249091
+  Parse Time: 0.80
+  Bind Time: 0.47
+  Check Time: 1.77
+  Emit Time: 0.00
